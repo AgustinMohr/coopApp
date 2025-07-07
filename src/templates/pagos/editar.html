@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Pago</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+
+    <h3>Editar pago del periodo {{ pago['periodo'] }}</h3>
+
+    <form method="POST" action="{{ url_for('actualizar_pago', id=pago['id']) }}">
+        <div class="mb-2"><input type="text" name="periodo" value="{{ pago['periodo'] }}" class="form-control" required></div>
+        <div class="mb-2"><input type="number" name="monto" step="0.01" value="{{ pago['monto'] }}" class="form-control" required></div>
+        <div class="mb-2">
+            <select name="forma_pago" class="form-select" required>
+                <option value="efectivo" {% if pago['forma_pago'] == 'efectivo' %}selected{% endif %}>Efectivo</option>
+                <option value="transferencia" {% if pago['forma_pago'] == 'transferencia' %}selected{% endif %}>Transferencia</option>
+            </select>
+        </div>
+        <div class="mb-2"><input type="date" name="fecha_pago" value="{{ pago['fecha_pago'] }}" class="form-control" required></div>
+
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a href="{{ url_for('ver_pagos', socio_id=pago['socio_id']) }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+</body>
+</html>

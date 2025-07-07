@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nuevo Pago</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+
+    <h3>Nuevo pago para socio ID {{ socio_id }}</h3>
+
+    <form method="POST" action="{{ url_for('guardar_pago', socio_id=socio_id) }}">
+        <div class="mb-2"><input type="text" name="periodo" class="form-control" placeholder="Periodo (Ej: Julio 2025)" required></div>
+        <div class="mb-2"><input type="number" name="monto" step="0.01" class="form-control" placeholder="Monto" required></div>
+        <div class="mb-2">
+            <select name="forma_pago" class="form-select" required>
+                <option value="">Seleccionar forma de pago</option>
+                <option value="efectivo">Efectivo</option>
+                <option value="transferencia">Transferencia</option>
+            </select>
+        </div>
+        <div class="mb-2"><input type="date" name="fecha_pago" class="form-control" required></div>
+
+        <button type="submit" class="btn btn-success">Guardar Pago</button>
+        <a href="{{ url_for('ver_pagos', socio_id=socio_id) }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+</body>
+</html>
